@@ -4,9 +4,13 @@ import Table from './Table'
 const App = () => {
     const [query, setQuery] = useState("")
 
+    const keys = ["name", "username", "email",]
+
     const serach = (data) => {
-        return data.filter((item) => { return item.username.toLowerCase().includes(query) || item.name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query) || item.address.street.toLowerCase().includes(query) })
-    }
+        return data.filter((item) =>
+            keys.some((key) => item[key].toLowerCase().includes(query))
+        );
+    };
     return (
         <>
             <div className="app">
