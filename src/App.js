@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { Users } from './user'
+import Table from './Table'
 const App = () => {
     const [query, setQuery] = useState("")
+
+    const serach = (data) => {
+        return data.filter((item) => { return item.username.toLowerCase().includes(query) || item.name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query) || item.address.street.toLowerCase().includes(query) })
+    }
     return (
         <>
             <div className="app">
                 <h2>Basic serach function</h2>
                 <input type="text" className='search' placeholder='serach...' onChange={(e) => setQuery(e.target.value)} />
-                <ul className='list'>
-                    {Users.filter((value) => { return value.username.toLowerCase().includes(query) }).map((value) => {
-                        return <li key={value.id}>{value.username}</li>
-                    })}
-                </ul>
+                <Table data={serach(Users)} />
             </div>
         </>
     )
